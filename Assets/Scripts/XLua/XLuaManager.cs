@@ -168,7 +168,6 @@ public class XLuaManager : MonoSingleton<XLuaManager>
             return GameUtility.SafeReadAllBytes(scriptPath);
         }
 #endif
-
         scriptPath = string.Format("{0}/{1}.bytes", luaAssetbundleAssetName, filepath);
         string assetbundleName = null;
         string assetName = null;
