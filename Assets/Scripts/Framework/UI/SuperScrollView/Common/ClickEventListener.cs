@@ -27,6 +27,7 @@ namespace SuperScrollView
         {
             get { return mIsPressed; }
         }
+        
         public void OnPointerClick(PointerEventData eventData)
         {
             if (eventData.clickCount == 2)
@@ -43,8 +44,8 @@ namespace SuperScrollView
                     mClickedHandler(gameObject);
                 }
             }
-
         }
+        
         public void SetClickEventHandler(System.Action<GameObject> handler)
         {
             mClickedHandler = handler;
@@ -65,7 +66,6 @@ namespace SuperScrollView
             mOnPointerUpHandler = handler;
         }
 
-
         public void OnPointerDown(PointerEventData eventData)
         {
             mIsPressed = true;
@@ -83,7 +83,5 @@ namespace SuperScrollView
                 mOnPointerUpHandler(gameObject);
             }
         }
-
     }
-
 }

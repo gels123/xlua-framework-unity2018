@@ -37,6 +37,7 @@ namespace SuperScrollView
         TopRightToBottomLeft,
         BottomRightToTopLeft,
     }
+    
     public enum GridFixedType
     {
         ColumnCountFixed = 0,
@@ -78,7 +79,6 @@ namespace SuperScrollView
             }
             return (obj is RowColumnPair) && Equals((RowColumnPair)obj);
         }
-
 
         public int mRow;
         public int mColumn;

@@ -27,7 +27,6 @@ public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T
                     }
                 }
             }
-
             return mInstance;
         }
     }
@@ -46,7 +45,6 @@ public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T
         {
             mInstance = this as T;
         }
-
         DontDestroyOnLoad(gameObject);
         Init();
     }
@@ -67,5 +65,4 @@ public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T
     {
 
     }
-
 }

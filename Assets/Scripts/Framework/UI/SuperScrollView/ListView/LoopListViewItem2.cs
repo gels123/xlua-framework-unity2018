@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace SuperScrollView
 {
-
     public class LoopListViewItem2 : MonoBehaviour
     {
         // indicates the item’s index in the list
@@ -129,7 +128,6 @@ namespace SuperScrollView
             }
         }
 
-
         public bool IsInitHandlerCalled
         {
             get
@@ -187,7 +185,6 @@ namespace SuperScrollView
                 return 0;
             }
         }
-
 
         public float LeftX
         {
