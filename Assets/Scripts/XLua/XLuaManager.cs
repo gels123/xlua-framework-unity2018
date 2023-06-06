@@ -31,6 +31,7 @@ public class XLuaManager : MonoSingleton<XLuaManager>
         base.Init();
         string path = AssetBundleUtility.PackagePathToAssetsPath(luaAssetbundleAssetName);
         AssetbundleName = AssetBundleUtility.AssetBundlePathToAssetBundleName(path);
+        //Debug.Log("XLuaManager.Init path=" + path + " AssetbundleName=" + AssetbundleName);
         InitLuaEnv();
     }
 

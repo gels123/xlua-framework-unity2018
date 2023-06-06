@@ -36,7 +36,4 @@ public class ReporterMessageReceiver : MonoBehaviour
 	{
 		//TO DO : put you custom code 
 	}
-
-
-
 }

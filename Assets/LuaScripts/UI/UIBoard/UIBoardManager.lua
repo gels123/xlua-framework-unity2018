@@ -18,11 +18,11 @@ EBoardType={
 }
 
 EBoardType.GetName = function (boardType)
-		if(boardType == EBoardType.PLAYER)then
+		if(boardType == EBoardType.PLAYER) then
 			return UIWindowNames.UIBoardPlayer
-		elseif(boardType == EBoardType.MONSTER)then
+		elseif(boardType == EBoardType.MONSTER) then
 			return UIWindowNames.UIBoardMonster
-		elseif(boardType == EBoardType.NPC)then
+		elseif(boardType == EBoardType.NPC) then
 			return UIWindowNames.UIBoardNPC
 		end
 	end
@@ -197,7 +197,7 @@ local function CloseWindow(self, owner, ui_name, destroy)
 	
 	InnerCloseWindow(self, target)
 
-	if(destroy)then
+	if(destroy) then
 		InnerDestroyWindow(self, owner, ui_name, target)
 	end
 end
@@ -205,7 +205,7 @@ end
 -- 获取窗口
 local function GetWindow(self, ui_owner, ui_name)
     local target = self.windows[ui_owner]
-    if(target == nil)then
+    if(target == nil) then
         return nil
     end
 
@@ -219,7 +219,7 @@ end
 
 local function SetWindow(self, ui_owner, ui_name, window)
     local target = self.windows[ui_owner]
-    if(target == nil)then
+    if(target == nil) then
         self.windows[ui_owner]={}
     end
 

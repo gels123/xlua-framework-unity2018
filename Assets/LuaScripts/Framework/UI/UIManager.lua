@@ -27,7 +27,6 @@ local UINoticeTip = CS.UINoticeTip.Instance
 
 -- 构造函数
 local function __init(self)
-	-- 成员变量
 	-- 消息中心
 	self.ui_message_center = Messenger.New()
 	-- 所有存活的窗体
@@ -63,7 +62,7 @@ local function __init(self)
 	end, function(index, layer)
 		assert(self.layers[layer.Name] == nil, "Aready exist layer : "..layer.Name)
 
-		if(layer ~= UILayers.TopLayer)then
+		if(layer ~= UILayers.TopLayer) then
 			local go = CS.UnityEngine.GameObject(layer.Name)
 			local trans = go.transform
 			trans:SetParent(self.transform)
@@ -73,11 +72,11 @@ local function __init(self)
 		new_layer:OnCreate(layer)
 		self.layers[layer.Name] = new_layer
 
-		if(layer == UILayers.TopLayer)then
+		if(layer == UILayers.TopLayer) then
 			new_layer.transform:SetAsLastSibling()
 		end
 	end)
-end
+end 
 
 -- 注册消息
 local function AddListener(self, e_type, e_listener)
@@ -464,6 +463,11 @@ local function OpenThreeButtonTip(self, title, content, btnText1, btnText2, btnT
 	self:OpenWindow(ui_name, cs_func, title, content, btnText1, btnText2, btnText3, callback1, callback2, callback3)
 end
 
+-- 展示Tip：三按钮
+local function GetTipLastClickIndex(self)
+	return UINoticeTip.LastClickIndex
+end
+
 -- 隐藏Tip
 local function CloseTip(self)
 	local ui_name = UIWindowNames.UINoticeTip
@@ -522,10 +526,10 @@ UIManager.PopWindowStack = PopWindowStack
 UIManager.OpenOneButtonTip = OpenOneButtonTip
 UIManager.OpenTwoButtonTip = OpenTwoButtonTip
 UIManager.OpenThreeButtonTip = OpenThreeButtonTip
+UIManager.GetTipLastClickIndex = GetTipLastClickIndex
 UIManager.CloseTip = CloseTip
 UIManager.WaitForViewCreated = WaitForViewCreated
 UIManager.WaitForTipResponse = WaitForTipResponse
-UIManager.GetTipLastClickIndex = GetTipLastClickIndex
 UIManager.__delete = __delete
 
 return UIManager;

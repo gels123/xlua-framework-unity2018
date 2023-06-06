@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEditor;
 using System;
 using HedgehogTeam.EasyTouch;
+using UnityEngine.UI;
 
 [InitializeOnLoad]
 public class EasytouchHierachyCallBack{

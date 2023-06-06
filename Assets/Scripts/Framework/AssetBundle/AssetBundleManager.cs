@@ -104,7 +104,6 @@ namespace AssetBundles
                 yield break;
             }
 #endif
-
             manifest = new Manifest();
             assetsPathMapping = new AssetsPathMapping();
             // 说明：同时请求资源可以提高加载速度
@@ -179,7 +178,6 @@ namespace AssetBundles
                 yield break;
             }
 #endif
-
             // 等待所有请求完成
             // 要是不等待Unity很多版本都有各种Bug
             yield return new WaitUntil(() =>
@@ -200,8 +198,6 @@ namespace AssetBundles
             assetbundleResident.Clear();
             yield break;
         }
-
-       
         #endregion
 
         #region AssetsCache
@@ -434,7 +430,6 @@ namespace AssetBundles
         }
 
         #endregion
-        
     }
 
 
@@ -627,7 +622,6 @@ namespace AssetBundles
                         }
                     }
                 }
-
                 return true;
             }
             else
@@ -768,7 +762,7 @@ namespace AssetBundles
             return creater;
         }
 
-        public BaseAssetAsyncLoader LoadAssetAsync(string assetPath, System.Type assetType, bool isAtlas=false)
+        public BaseAssetAsyncLoader LoadAssetAsync(string assetPath, System.Type assetType, bool isAtlas = false)
         {
 #if UNITY_EDITOR
             if (AssetBundleConfig.IsEditorMode)
@@ -786,7 +780,6 @@ namespace AssetBundles
                 }
             }
 #endif
-
             string assetbundleName = null;
             string assetName = null;
             bool status = MapAssetPath(assetPath, out assetbundleName, out assetName);
@@ -795,7 +788,6 @@ namespace AssetBundles
                 Logger.LogError("No assetbundle at asset path :" + assetPath);
                 return null;
             }
-
             var loader = AssetAsyncLoader.Get(isAtlas, assetType);
             prosessingAssetAsyncLoader.Add(loader);
             if (IsAssetLoaded(assetName))

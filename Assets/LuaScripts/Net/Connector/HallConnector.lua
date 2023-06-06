@@ -38,7 +38,7 @@ local function LoadPB()
 	};
 	
 	--编辑器下和移动端，加载位置不同
-	if(CS.GameUtility.GetPlatform() == "Windows")then
+	if(CS.GameUtility.GetPlatform() == "Windows") then
 		table.walk(pbFiles,function(i,path)
 			print(path.." pb load success")
 			assert(pb.loadfile("Assets/LuaScripts/"..path))
@@ -58,7 +58,7 @@ local function OnReceivePackage(self, receive_bytes)
 	local msg_id = string.unpack("=I2",receive_bytes)
 	local msg_bytes = string.sub(receive_bytes, 3)
 
-	if(self.handlers[msg_id] == nil)then
+	if(self.handlers[msg_id] == nil) then
 		Logger.Error("msg_id 未绑定函数"..msg_id);
 		return;
 	end
@@ -66,7 +66,7 @@ local function OnReceivePackage(self, receive_bytes)
 	--Logger.Debug("receive message cmdId:"..msg_id.." | msg_bytes.len:"..#msg_bytes);
 
 	local msg = nil;
-	if(msg_bytes ~= nil)then
+	if(msg_bytes ~= nil) then
 		msg = pb.decode(MsgIDMap[msg_id], msg_bytes)
 	end
 
@@ -92,7 +92,7 @@ end
 local function SendMessage(self, msg_id, msg)
 	local bytes = ""
 	bytes = bytes..string.pack("=I2",msg_id);
-	if(msg)then
+	if(msg) then
 		local msg_bytes=pb.encode(MsgIDMap[msg_id], msg)
 		bytes = bytes..msg_bytes
 	end

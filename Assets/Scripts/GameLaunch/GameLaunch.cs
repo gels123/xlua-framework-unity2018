@@ -24,7 +24,7 @@ public class GameLaunch : MonoBehaviour
         Application.targetFrameRate = 60;
     }
 
-    IEnumerator Start ()
+    IEnumerator Start()
     {
         //注释掉IOS的推送服务
 //#if UNITY_IPHONE
@@ -60,7 +60,8 @@ public class GameLaunch : MonoBehaviour
         Logger.Log(string.Format("Init SDK use {0}ms", (DateTime.Now - start).Milliseconds));
 
         yield return null;
-
+        
+        // 初始化NoticeTip
         start = DateTime.Now;
         yield return InitNoticeTipPrefab();
         Logger.Log(string.Format("Load noticeTipPrefab use {0}ms", (DateTime.Now - start).Milliseconds));
@@ -169,7 +170,6 @@ public class GameLaunch : MonoBehaviour
         var luanchLayer = transform.Find(LaunchLayerPath);
         GameObject go = GameObject.Instantiate(prefab, luanchLayer);
         go.name = prefab.name;
-        
         Logger.Log(string.Format("Instantiate use {0}ms", (DateTime.Now - start).Milliseconds));
         return go;
     }
@@ -192,9 +192,9 @@ public class GameLaunch : MonoBehaviour
 
     IEnumerator InitLaunchPrefab()
     {
-        var loader = AssetBundleManager.Instance.LoadAssetAsync(launchPrefabPath,typeof(GameObject));
+        var loader = AssetBundleManager.Instance.LoadAssetAsync(launchPrefabPath, typeof(GameObject));
         yield return loader;
-        launchPrefab= loader.asset as GameObject;
+        launchPrefab = loader.asset as GameObject;
         loader.Dispose();
         if (launchPrefab == null)
         {
@@ -226,7 +226,7 @@ public class GameLaunch : MonoBehaviour
         var abloader = AssetBundleManager.Instance.LoadAssetBundleAsync(luaAssetbundleName,typeof(TextAsset));
         yield return abloader;
         abloader.Dispose();
-
+        
         XLuaManager.Instance.OnInit();
         XLuaManager.Instance.StartHotfix();
         XLuaManager.Instance.StartGame();

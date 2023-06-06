@@ -10,7 +10,6 @@ local SceneManager = BaseClass("SceneManager", Singleton)
 
 -- 构造函数
 local function __init(self)
-	-- 成员变量
 	-- 当前场景
 	self.current_scene = nil
 	-- 是否忙
@@ -22,9 +21,9 @@ end
 -- 切换场景：内部使用协程
 local function CoInnerSwitchScene(self, scene_config)
 	-- 打开loading界面
-	local uimgr_instance = UIManager:GetInstance()
-	uimgr_instance:OpenWindow(UIWindowNames.UILoading)
-	local window = uimgr_instance:GetWindow(UIWindowNames.UILoading)
+	local uimgr = UIManager:GetInstance()
+	uimgr:OpenWindow(UIWindowNames.UILoading)
+	local window = uimgr:GetWindow(UIWindowNames.UILoading)
 	local model = window.Model
 	model.value = 0
 	coroutine.waitforframes(1)
@@ -39,7 +38,7 @@ local function CoInnerSwitchScene(self, scene_config)
 	model.value = model.value + 0.01
 	coroutine.waitforframes(1)
 	-- 清理UI
-	uimgr_instance:DestroyWindowExceptLayer(UILayers.TopLayer)
+	uimgr:DestroyWindowExceptLayer(UILayers.TopLayer)
 	model.value = model.value + 0.01
 	coroutine.waitforframes(1)
 	-- 清理资源缓存
@@ -98,13 +97,14 @@ local function CoInnerSwitchScene(self, scene_config)
 	model.value = 1.0
 	coroutine.waitforframes(3)
 	-- 加载完成，关闭loading界面
-	uimgr_instance:CloseWindow(UIWindowNames.UILoading)
+	uimgr:CloseWindow(UIWindowNames.UILoading)
 	self.current_scene = logic_scene
 	self.busing = false
 end
 
 -- 切换场景
 local function SwitchScene(self, scene_config)
+	-- 不能切换为`启动场景`和`加载场景`
 	assert(scene_config ~= LaunchScene and scene_config ~= LoadingScene)
 	assert(scene_config.Type ~= nil)
 	if self.busing then 
@@ -113,7 +113,6 @@ local function SwitchScene(self, scene_config)
 	if self.current_scene and self.current_scene.scene_config.Name == scene_config.Name then
 		return
 	end
-	
 	self.busing = true
 	coroutine.start(CoInnerSwitchScene, self, scene_config)
 end

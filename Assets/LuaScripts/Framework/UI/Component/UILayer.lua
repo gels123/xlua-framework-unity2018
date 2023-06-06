@@ -72,7 +72,6 @@ local function OnDestroy(self)
 	base.OnDestroy(self)
 end
 
-
 UILayer.OnCreate = OnCreate
 UILayer.PopWindowOder = PopWindowOder
 UILayer.PushWindowOrder = PushWindowOrder

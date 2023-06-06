@@ -42,7 +42,7 @@ namespace AssetBundles
         {
             return prosessingAssetBundleAsyncLoader;
         }
-
+                               
         [BlackList]
         public List<AssetAsyncLoader> GetProsessingAssetAsyncLoader()
         {
@@ -81,7 +81,6 @@ namespace AssetBundles
                 assetNameList.Add(assetName);
                 assetbundleDic[assetbundleName] = assetNameList;
             }
-
             return assetbundleDic;
         }
 
@@ -104,7 +103,6 @@ namespace AssetBundles
                     count++;
                 }
             }
-
             return count;
         }
 
@@ -170,7 +168,6 @@ namespace AssetBundles
                     continue;
                 }
             }
-
             return refrences;
         }
 
@@ -188,7 +185,6 @@ namespace AssetBundles
                     refrences.Add(curLoader.Sequence.ToString());
                 }
             }
-
             return refrences;
         }
     }

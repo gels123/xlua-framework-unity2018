@@ -70,7 +70,6 @@ namespace AssetBundles
                     }
                     mIsEditorMode = EditorPrefs.GetBool(kIsEditorMode, true) ? 1 : 0;
                 }
-
                 return mIsEditorMode != 0;
             }
             set

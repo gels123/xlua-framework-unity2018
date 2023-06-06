@@ -30,7 +30,7 @@ end
 
 local function LateUpdate(self)
 	Logger.Log("LateUpdate");
-	if (self.model.target == null)then
+	if (self.model.target == null) then
 		return;
 	end
 
@@ -52,7 +52,7 @@ local function UpdatePosition(self)
 end
 
 local function Refresh(self)
-	if(self.model.owner.id)then
+	if(self.model.owner.id) then
 		self.nickName:SetText(self.model.owner.nickName)
 	end
 end

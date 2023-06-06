@@ -57,7 +57,6 @@ public class AssetbundleUpdater : MonoBehaviour
         timeStamp = (DateTime.Now - startDate).TotalMilliseconds;
         UILauncher.Instance.SetSatus("正在检测资源更新...");
     }
-
     #region 主流程
 
     public IEnumerator StartCheckUpdate()
@@ -506,7 +505,6 @@ public class AssetbundleUpdater : MonoBehaviour
             yield return AssetBundleManager.Instance.Cleanup();
             yield return AssetBundleManager.Instance.Initialize();
         }
-
         Logger.Log(string.Format("UpdateFinish use {0}ms", (DateTime.Now - start).Milliseconds));
     }
 
@@ -534,7 +532,6 @@ public class AssetbundleUpdater : MonoBehaviour
         {
             return;
         }
-
         for (int i = downloadingRequest.Count - 1; i >= 0; i--)
         {
             var request = downloadingRequest[i];
@@ -556,11 +553,9 @@ public class AssetbundleUpdater : MonoBehaviour
                     var filePath = AssetBundleUtility.GetPersistentDataPath(request.assetbundleName);
                     GameUtility.SafeWriteAllBytes(filePath, request.bytes);
                 }
-
                 request.Dispose();
             }
         }
-
         if (!hasError)
         {
             while (downloadingRequest.Count < MAX_DOWNLOAD_NUM && needDownloadList.Count > 0)
@@ -571,19 +566,16 @@ public class AssetbundleUpdater : MonoBehaviour
                 downloadingRequest.Add(request);
             }
         }
-
         if (downloadingRequest.Count == 0)
         {
             isDownloading = false;
         }
-
         float progressSlice = 1.0f / totalDownloadCount;
         float progressValue = finishedDownloadCount * progressSlice;
         for (int i = 0; i < downloadingRequest.Count; i++)
         {
             progressValue += (progressSlice * downloadingRequest[i].progress);
         }
-
         UILauncher.Instance.SetValue(progressValue);
     }
 
