@@ -69,6 +69,7 @@ end
 
 -- 清理：消息系统不需要强行清理
 local function Cleanup(self)
+	
 end
 
 -- 添加Update更新
@@ -118,4 +119,5 @@ UpdateManager.RemoveUpdate = RemoveUpdate
 UpdateManager.RemoveLateUpdate = RemoveLateUpdate
 UpdateManager.RemoveFixedUpdate = RemoveFixedUpdate
 UpdateManager.__delete = __delete
+
 return UpdateManager;

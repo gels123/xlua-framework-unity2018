@@ -2,20 +2,18 @@
 require "Global.Global"
 	
 -- 定义为全局模块，整个lua程序的入口类
-GameMain = {};
+GameMain = {}
 
 -- 进入游戏
 local function EnterGame()
-
 	-- luaide 调试
 	-- local breakInfoFun,xpcallFun = require("LuaDebug")("localhost", 7003)
 	-- luaide 调试
 
 	-- TODO：服务器信息应该从服务器上拉取，这里读取测试数据
 	local ServerData = require "DataCenter.ServerData.ServerData"
-	local TestServerData = require "GameTest.DataTest.TestServerData"
 	local ClientData = require "DataCenter.ClientData.ClientData"
-	ServerData:GetInstance():ParseServerList(TestServerData)
+	ServerData:GetInstance():ParseServerList()
 	local selected = ClientData:GetInstance().login_server_id
 	if selected == nil or ServerData:GetInstance().servers[selected] == nil then
 		ClientData:GetInstance():SetLoginServerID(10001)

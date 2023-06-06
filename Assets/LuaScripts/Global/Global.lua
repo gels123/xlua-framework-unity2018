@@ -1,6 +1,6 @@
 --[[
 -- added by wsh @ 2017-11-30
--- 1、加载全局模块，所有全局性的东西都在这里加载，好集中管理
+-- 1、加载全局模块，所有全局性的东西都在这里加载，集中管理
 -- 2、模块定义时一律用local再return，模块是否是全局模块由本脚本决定，在本脚本加载的一律为全局模块
 -- 3、对必要模块执行初始化
 -- 注意：
@@ -69,7 +69,6 @@ UIPointerDownUp = require "Framework.UI.Component.UIPointerDownUp"
 UIPointerLongPress = require "Framework.UI.Component.UIPointerLongPress"
 UIPointerDoubleClick = require "Framework.UI.Component.UIPointerDoubleClick"
 
-
 -- ui window
 UILayers = require "Framework.UI.UILayers"
 UIWindow = require "Framework.UI.UIWindow"
@@ -91,6 +90,7 @@ LogicUpdater = require "GameLogic.Main.LogicUpdater"
 
 -- scenes
 BaseScene = require "Framework.Scene.Base.BaseScene"
+SceneManager = require "Framework.Scene.SceneManager"
 SceneManager = require "Framework.Scene.SceneManager"
 SceneConfig = require "Scenes.Config.SceneConfig"
 

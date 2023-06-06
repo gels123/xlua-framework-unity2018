@@ -29,6 +29,7 @@ public class UILauncher : Singleton<UILauncher>
         statusText = go.transform.Find("ContentRoot/LoadingDesc").GetComponent<Text>();
         slider = go.transform.Find("ContentRoot/SliderBar").GetComponent<Slider>();
         slider.gameObject.SetActive(false);
+        SetValue(0);
     }
     
     public void SetSatus(string status)
@@ -38,6 +39,7 @@ public class UILauncher : Singleton<UILauncher>
 
     public void SetValue(float progress, bool active = true)
     {
+        //Debug.Log("SetValue progress=" + progress);
         slider.gameObject.SetActive(active);
         slider.normalizedValue = progress;
     }
@@ -53,6 +55,7 @@ public class UILauncher : Singleton<UILauncher>
         if (go != null)
         {
             Object.Destroy(go);
+            go = null;
         }
     }
 }

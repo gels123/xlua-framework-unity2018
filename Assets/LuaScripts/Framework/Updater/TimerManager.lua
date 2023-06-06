@@ -292,4 +292,5 @@ TimerManager.GetCoTimer = GetCoTimer
 TimerManager.GetCoLateTimer = GetCoLateTimer
 TimerManager.GetCoFixedTimer = GetCoFixedTimer
 TimerManager.__delete = __delete
+
 return TimerManager;

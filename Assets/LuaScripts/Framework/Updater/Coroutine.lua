@@ -7,10 +7,10 @@
 -- 3、协程里启动子级协程并等待其执行完毕，在Unity侧是yield return StartCoroutine，但是在Lua不需要另外启动协程，直接调用函数即可
 -- 4、如果lua侧协程不使用本脚本的扩展函数，则无法实现分帧；lua侧启动协程以后不管协程函数调用栈多深，不管使用多少次本脚本扩展函数，都运行在一个协程
 -- 5、使用coroutine.waitforframes(1)来等待一帧，千万不要用coroutine.yield，否则整个协程将永远不被唤醒===>***很重要，除非你在其它地方手动唤醒它
--- 6、子级协同在lua侧等同于普通函数调用，和普通函数一样可在退出函数时带任意返回值，而Unity侧协同不能获取子级协同退出时的返回值
--- 7、理论上任何协同都可以用回调方式去做，但是对于异步操作，回调方式也需要每帧去检测异步操作是否完成，消耗相差不多，而使用协同可以简单很多，清晰很多
+-- 6、子级协程在lua侧等同于普通函数调用，和普通函数一样可在退出函数时带任意返回值，而Unity侧协程不能获取子级协程退出时的返回值
+-- 7、理论上任何协程都可以用回调方式去做，但是对于异步操作，回调方式也需要每帧去检测异步操作是否完成，消耗相差不多，而使用协程可以简单很多，清晰很多
 -- 8、协程所有等待时间的操作，如coroutine.waitforseconds误差由帧率决定，循环等待时有累积误差，所以最好只是用于分帧，或者等待异步操作
--- 9、yieldstart、yieldreturn、yieldbreak实际上是用lua不对称协程实现对称协同，使用方式和Unity侧协同类似，注意点看相关函数头说明
+-- 9、yieldstart、yieldreturn、yieldbreak实际上是用lua不对称协程实现对称协程，使用方式和Unity侧协程类似，注意点看相关函数头说明
 -- TODO：
 -- 1、CS侧做可视化调试器，方便单步查看各个协程运行状态
 --]]
@@ -28,10 +28,9 @@ local co_pool = {}
 
 -- 回收协程
 local function __RecycleCoroutine(co)
-	if not coroutine.status(co) == "suspended" then
+	if coroutine.status(co) ~= "suspended" then
 		error("Try to recycle coroutine not suspended : "..coroutine.status(co))
 	end
-	
 	table.insert(co_pool, co)
 end
 
@@ -86,7 +85,7 @@ end
 
 -- 协程运行在保护模式下，不会抛出异常，所以这里要捕获一下异常
 -- 但是可能会遇到调用协程时对象已经被销毁的情况，这种情况应该被当做正常情况
--- 所以这里并不继续抛出异常，而只是输出一下错误日志，不要让客户端当掉
+-- 所以这里并不继续抛出异常，而只是输出一下错误日志，不要让客户端宕掉
 -- 注意：Logger中实际上在调试模式会抛出异常
 local function __PResume(co, func, ...)
 	local resume_ret = nil
@@ -375,7 +374,7 @@ coroutine.stopwaiting = stopwaiting
 
 -- 调试用：查看内部状态
 if Config.Debug then
-	return{
+	return {
 		action_map = action_map,
 		action_pool = action_pool,
 		yield_map = yield_map,
