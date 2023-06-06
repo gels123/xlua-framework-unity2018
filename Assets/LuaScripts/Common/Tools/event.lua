@@ -116,7 +116,7 @@ end
 UpdateBeat 			= event("Update")
 LateUpdateBeat		= event("LateUpdate")
 FixedUpdateBeat		= event("FixedUpdate")
---只在协同使用
+--只在协程使用
 CoUpdateBeat		= event("CoUpdate")
 CoLateUpdateBeat	= event("CoLateUpdate")
 CoFixedUpdateBeat 	= event("CoFixedUpdate")

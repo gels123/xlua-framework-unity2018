@@ -72,14 +72,12 @@ function ToBoolean(s)
 		["true"] = true,
 		["false"] = false,
 	}
-
 	return transform_map[s]
 end
 
 -- 深拷贝对象
 function DeepCopy(object)
 	local lookup_table = {}
-	
 	local function _copy(object)
 		if type(object) ~= "table" then
 			return object
@@ -92,10 +90,8 @@ function DeepCopy(object)
 		for index, value in pairs(object) do
 			new_table[_copy(index)] = _copy(value)
 		end
-
 		return setmetatable(new_table, getmetatable(object))
 	end
-
 	return _copy(object)
 end
 

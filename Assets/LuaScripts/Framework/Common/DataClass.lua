@@ -82,7 +82,6 @@ function DataClass(classname, data_tb, super)
 					c.__init(ret_data, ...)
 				end
 			end
-			
 			if #args > 0 then
 				create(cls, ...)
 			end

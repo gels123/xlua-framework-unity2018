@@ -59,4 +59,5 @@ end
 Ray.unity_ray = CS.UnityEngine.Ray
 CS.UnityEngine.Ray = Ray
 setmetatable(Ray, Ray)
+
 return Ray

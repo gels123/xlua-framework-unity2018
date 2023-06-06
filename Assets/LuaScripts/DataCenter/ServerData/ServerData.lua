@@ -25,6 +25,9 @@ end
 -- 解析网络数据
 local function ParseServerList(self, servers)
 	self.servers = {}
+	if not servers then
+		servers = require "GameTest.DataTest.TestServerData"
+	end
 	for _,v in pairs(servers) do
 		local item = ServerItem.New()
 		item.server_id = v.server_id
@@ -36,6 +39,7 @@ local function ParseServerList(self, servers)
 	DataManager:GetInstance():Broadcast(DataMessageNames.ON_SERVER_LIST_CHG, self)
 end
 
+ServerData.__init = __init
 ServerData.ParseServerList = ParseServerList
 
 return ServerData

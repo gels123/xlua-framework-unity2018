@@ -9,8 +9,8 @@ local _class = {}
 -- added by wsh @ 2017-12-09
 -- 自定义类型
 ClassType = {
-	class = 1,
-	instance = 2,
+	class = 1,		--类
+	instance = 2,	--对象
 }
  
 function BaseClass(classname, super)
@@ -68,10 +68,10 @@ function BaseClass(classname, super)
 	_class[class_type] = vtbl
  
 	setmetatable(class_type, {
+		--If property was not exsit in class_type, then add into vtbl.
 		__newindex = function(t,k,v)
 			vtbl[k] = v
-		end
-		, 
+		end, 
 		--For call parent method
 		__index = vtbl,
 	})
