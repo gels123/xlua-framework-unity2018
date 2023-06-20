@@ -6,10 +6,11 @@ GameMain = {}
 
 -- 进入游戏
 local function EnterGame()
-	-- luaide 调试
+	-- lua调试
 	-- local breakInfoFun,xpcallFun = require("LuaDebug")("localhost", 7003)
-	-- luaide 调试
-
+	--local ok = require "emmy_core".tcpListen('0.0.0.0', 7003)
+	--print("debug with emmylua", ok)
+	
 	-- TODO：服务器信息应该从服务器上拉取，这里读取测试数据
 	local ServerData = require "DataCenter.ServerData.ServerData"
 	local ClientData = require "DataCenter.ClientData.ClientData"

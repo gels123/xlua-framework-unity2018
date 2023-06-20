@@ -34,9 +34,9 @@ public class LuaUpdater : MonoBehaviour
 
     public void Restart(LuaEnv luaEnv)
     {
-        luaUpdate = luaEnv.Global.Get<Action<float, float>>("Update");
-        luaLateUpdate = luaEnv.Global.Get<Action>("LateUpdate");
-        luaFixedUpdate = luaEnv.Global.Get<Action<float>>("FixedUpdate");
+        luaUpdate = luaEnv.Global.Get<Action<float, float>>("Update");      //event.lua
+        luaLateUpdate = luaEnv.Global.Get<Action>("LateUpdate");            //event.lua
+        luaFixedUpdate = luaEnv.Global.Get<Action<float>>("FixedUpdate");   //event.lua
     }
 
     void Update()

@@ -74,7 +74,7 @@ end
 local Time = {}
 local counter = 1
 
-function Time:SetDeltaTime(deltaTime, unscaledDeltaTime)	
+function Time:SetDeltaTime(deltaTime, unscaledDeltaTime)
 	local _Time = _Time
 	_Time.deltaTime = deltaTime	
 	_Time.unscaledDeltaTime = unscaledDeltaTime

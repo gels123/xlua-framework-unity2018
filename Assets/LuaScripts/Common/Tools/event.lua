@@ -16,35 +16,34 @@ local error = error
 local traceback = debug.traceback
 local ilist = ilist
 
+local _event = {}
+_event.__index = _event
+
 event_err_handle = function(msg)
 	error(msg, 2)
 end
 		
 local _pcall = {
 	__call = function(self, ...)
-		local status, err
+		local ok, err
 		if not self.obj then
-			status, err = pcall(self.func, ...)
+			ok, err = pcall(self.func, ...)
 		else
-			status, err = pcall(self.func, self.obj, ...)
+			ok, err = pcall(self.func, self.obj, ...)
 		end	
-		if not status then
+		if not ok then
 			event_err_handle(err.."\n"..traceback())
 		end
-		return status
+		return ok
 	end,
-	
 	__eq = function(lhs, rhs)
 		return lhs.func == rhs.func and lhs.obj == rhs.obj
 	end,
 }
 
 local function functor(func, obj)	
-	return setmetatable({func = func, obj = obj}, _pcall)			
+	return setmetatable({func = func, obj = obj}, _pcall)
 end
-
-local _event = {}
-_event.__index = _event
 
 function _event:CreateListener(func, obj)
 	func = functor(func, obj)
@@ -53,7 +52,6 @@ end
 
 function _event:AddListener(handle)	
 	assert(handle)
-
 	if self.lock then		
 		table.insert(self.opList, function() self.list:pushnode(handle) end)		
 	else
@@ -62,8 +60,7 @@ function _event:AddListener(handle)
 end
 
 function _event:RemoveListener(handle)	
-	assert(handle)	
-
+	assert(handle)
 	if self.lock then		
 		table.insert(self.opList, function() self.list:remove(handle) end)				
 	else
@@ -85,8 +82,6 @@ end
 _event.__call = function(self, ...)
 	local _list = self.list	
 	self.lock = true
-	local ilist = ilist				
-	
 	for i, f in ilist(_list) do
 		self.current = i
 		if not f(...) then
@@ -94,12 +89,10 @@ _event.__call = function(self, ...)
 			self.lock = false
 		end
 	end
-	
 	local opList = self.opList
 	self.lock = false
-
-	for i, op in ipairs(opList) do
-		op()
+	for i, f in ipairs(opList) do
+		f()
 		opList[i] = nil
 	end
 end

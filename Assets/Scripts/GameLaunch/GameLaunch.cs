@@ -118,8 +118,7 @@ public class GameLaunch : MonoBehaviour
         var persistentTxt= GameUtility.SafeReadAllText(appVersionPath);
         if (string.IsNullOrEmpty(persistentTxt))
         {
-            GameUtility.SafeWriteAllText(appVersionPath,
-                streamingAppVersion + "|" + streamingResVersion + "|" + streamingChannel);
+            GameUtility.SafeWriteAllText(appVersionPath, streamingAppVersion + "|" + streamingResVersion + "|" + streamingChannel);
         }
         else
         {

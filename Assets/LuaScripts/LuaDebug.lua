@@ -2636,7 +2636,4 @@ function ZZBase64.__decodeLeft2(res, index, text, len)
     res[index] = string.char(num)
 end
 
-
-
-
 return StartDebug
