@@ -28,8 +28,9 @@ local co_pool = {}
 
 -- 回收协程
 local function __RecycleCoroutine(co)
-	if coroutine.status(co) ~= "suspended" then
-		error("Try to recycle coroutine not suspended : "..coroutine.status(co))
+	--print("__RecycleCoroutine co=", tostring(co), "status=", coroutine.status(co))
+	if coroutine.status(co) ~= "running" then 
+		error("Try to recycle coroutine not running : "..tostring(co).." status: "..coroutine.status(co))
 	end
 	table.insert(co_pool, co)
 end
@@ -41,7 +42,7 @@ local function __Coroutine(func, ...)
 		local ret = SafePack(func(SafeUnpack(args)))
 		__RecycleCoroutine(coroutine.running())
 		args = SafePack(coroutine.yield(SafeUnpack(ret)))
-		func = args[1]
+		func = args[1] --args[1] is coroutine.resume(co, val1, ...)'s val1
 		table.remove(args, 1)
 	end
 end
@@ -89,7 +90,7 @@ end
 -- 注意：Logger中实际上在调试模式会抛出异常
 local function __PResume(co, func, ...)
 	local resume_ret = nil
-	if func ~= nil then
+	if func then
 		resume_ret = SafePack(coroutine.resume(co, func, ...))
 	else
 		resume_ret = SafePack(coroutine.resume(co, ...))
@@ -105,8 +106,7 @@ local function __PResume(co, func, ...)
 	return flag, resume_ret
 end
 
--- 启动一个协程：等待协程第一次让出控制权时主函数继续往下执行，这点表现和Unity协程一致
--- 等同于Unity侧的StartCoroutine
+-- 启动一个协程：等待协程第一次让出控制权时主函数继续往下执行，这点表现和Unity协程一致，等同于Unity侧的StartCoroutine
 -- @func：协程函数体
 -- @...：传入协程的可变参数
 local function start(func, ...)

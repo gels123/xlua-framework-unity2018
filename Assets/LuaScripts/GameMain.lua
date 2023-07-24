@@ -39,9 +39,7 @@ local function Start()
 	-- 	UnitTest.Run()
 	-- end
 	
-	coroutine.start(function()
-		EnterGame()
-	end)
+	coroutine.start(EnterGame)
 end
 
 -- 场景切换通知

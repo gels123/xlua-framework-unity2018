@@ -820,6 +820,12 @@ namespace AssetBundles
             }
         }
         #endregion
+        
+        // Hotfix测试---用于测试热更模块的热修复
+        public void TestHotfix()
+        {
+            Logger.Log("********** AssetBundleManager : Call TestHotfix in cs...");
+        }
     }
 
 }
