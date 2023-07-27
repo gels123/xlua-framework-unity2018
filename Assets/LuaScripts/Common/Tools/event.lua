@@ -114,18 +114,21 @@ CoUpdateBeat		= event("CoUpdate")
 CoLateUpdateBeat	= event("CoLateUpdate")
 CoFixedUpdateBeat 	= event("CoFixedUpdate")
 
+-- LuaUpdater.cs中每帧调用
 function Update(deltaTime, unscaledDeltaTime)
 	Time:SetDeltaTime(deltaTime, unscaledDeltaTime)
 	UpdateBeat()
 	CoUpdateBeat()
 end
 
+-- LuaUpdater.cs中每帧调用
 function LateUpdate()
 	LateUpdateBeat()
 	CoLateUpdateBeat()
 	Time:SetFrameCount()
 end
 
+-- LuaUpdater.cs中每帧调用
 function FixedUpdate(fixedDeltaTime)
 	Time:SetFixedDelta(fixedDeltaTime)
 	FixedUpdateBeat()
