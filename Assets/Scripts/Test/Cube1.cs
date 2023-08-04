@@ -15,7 +15,6 @@ public class Cube1 : MonoBehaviour
     {
         isShowTip = true;
         //Debug.Log (cube.name);//可以得到物体的名字
- 
     }
     void OnMouseExit()
     {
