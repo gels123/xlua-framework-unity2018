@@ -43,26 +43,26 @@ public static class XLuaMessenger
 
     public static void AddListener(string eventType, Delegate handler)
     {
-        Messenger.OnListenerAdding(eventType, handler);
-        Messenger.eventTable[eventType] = Delegate.Combine(Messenger.eventTable[eventType], handler);
+        Messager.OnListenerAdding(eventType, handler);
+        Messager.eventTable[eventType] = Delegate.Combine(Messager.eventTable[eventType], handler);
     }
 
     public static void RemoveListener(string eventType, Delegate handler)
     {
         //OnListenerRemoving(eventType, handler);
-        if (Messenger.eventTable.ContainsKey(eventType))
+        if (Messager.eventTable.ContainsKey(eventType))
         {
-            Messenger.eventTable[eventType] = Delegate.Remove(Messenger.eventTable[eventType], handler);
+            Messager.eventTable[eventType] = Delegate.Remove(Messager.eventTable[eventType], handler);
         }
-        Messenger.OnListenerRemoved(eventType);
+        Messager.OnListenerRemoved(eventType);
     }
 
     public static void Broadcast(string eventType, object arg1)
     {
-        Messenger.OnBroadcasting(eventType);
+        Messager.OnBroadcasting(eventType);
 
         Delegate d;
-        if (Messenger.eventTable.TryGetValue(eventType, out d))
+        if (Messager.eventTable.TryGetValue(eventType, out d))
         {
             try
             {
@@ -77,17 +77,17 @@ public static class XLuaMessenger
             catch (System.Exception ex)
             {
                 Logger.LogError(string.Format("{0}:{1}", ex.Message, string.Format("arg1 = {0}, typeof(arg1) = {1}", arg1, arg1.GetType())));
-                throw Messenger.CreateBroadcastSignatureException(eventType);
+                throw Messager.CreateBroadcastSignatureException(eventType);
             }
         }
     }
 
     public static void Broadcast(string eventType, object arg1, object arg2)
     {
-        Messenger.OnBroadcasting(eventType);
+        Messager.OnBroadcasting(eventType);
 
         Delegate d;
-        if (Messenger.eventTable.TryGetValue(eventType, out d))
+        if (Messager.eventTable.TryGetValue(eventType, out d))
         {
             try
             {
@@ -104,17 +104,17 @@ public static class XLuaMessenger
             catch (System.Exception ex)
             {
                 Logger.LogError(string.Format("{0}:{1}", ex.Message, string.Format("arg1 = {0}, typeof(arg1) = {1}, arg2 = {2}, typeof(arg2) = {3}", arg1, arg1.GetType(), arg2, arg2.GetType())));
-                throw Messenger.CreateBroadcastSignatureException(eventType);
+                throw Messager.CreateBroadcastSignatureException(eventType);
             }
         }
     }
 
     public static void Broadcast(string eventType, object arg1, object arg2, object arg3)
     {
-        Messenger.OnBroadcasting(eventType);
+        Messager.OnBroadcasting(eventType);
 
         Delegate d;
-        if (Messenger.eventTable.TryGetValue(eventType, out d))
+        if (Messager.eventTable.TryGetValue(eventType, out d))
         {
             try
             {
@@ -133,7 +133,7 @@ public static class XLuaMessenger
             catch (System.Exception ex)
             {
                 Logger.LogError(string.Format("{0}:{1}", ex.Message, string.Format("arg1 = {0}, typeof(arg1) = {1}, arg2 = {2}, typeof(arg2) = {3}, arg3 = {2}, typeof(arg3) = {3}", arg1, arg1.GetType(), arg2, arg2.GetType(), arg3, arg3.GetType())));
-                throw Messenger.CreateBroadcastSignatureException(eventType);
+                throw Messager.CreateBroadcastSignatureException(eventType);
             }
         }
     }

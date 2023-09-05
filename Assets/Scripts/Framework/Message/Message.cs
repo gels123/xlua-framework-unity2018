@@ -29,7 +29,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
  
-static internal class Messenger {
+static internal class Messager {
     #region Internal variables
     //Disable the unused variable warning
 #pragma warning disable 0414
@@ -319,6 +319,6 @@ public sealed class MessengerHelper : MonoBehaviour {
  
     //Clean up eventTable every time a new level loads.
     public void OnLevelWasLoaded() {
-        Messenger.Cleanup();
+        Messager.Cleanup();
     }
 }
