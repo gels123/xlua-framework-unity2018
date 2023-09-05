@@ -31,18 +31,19 @@ using UnityEngine;
  
 static internal class Messenger {
     #region Internal variables
- 
     //Disable the unused variable warning
 #pragma warning disable 0414
     //Ensures that the MessengerHelper will be created automatically upon start of the game.
-    static private MessengerHelper messengerHelper = ( new GameObject("MessengerHelper") ).AddComponent< MessengerHelper >();
+    static private MessengerHelper messengerHelper = ( new GameObject("MessengerHelper") ).AddComponent<MessengerHelper>();
 #pragma warning restore 0414
  
     static public Dictionary<string, Delegate> eventTable = new Dictionary<string, Delegate>();
  
     //Message handlers that should never be removed, regardless of calling Cleanup
-    static public List< string > permanentMessages = new List< string > ();
+    static public List<string> permanentMessages = new List<string>();
     #endregion
+    
+    
     #region Helper methods
     //Marks a certain message as permanent.
     static public void MarkAsPermanent(string eventType) {
@@ -60,25 +61,20 @@ static internal class Messenger {
 #if LOG_ALL_MESSAGES
         Debug.Log("MESSENGER Cleanup. Make sure that none of necessary listeners are removed.");
 #endif
- 
-        List< string > messagesToRemove = new List<string>();
- 
+        List<string> messagesToRemove = new List<string>();
         foreach (KeyValuePair<string, Delegate> pair in eventTable) {
             bool wasFound = false;
- 
             foreach (string message in permanentMessages) {
                 if (pair.Key == message) {
                     wasFound = true;
                     break;
                 }
             }
- 
             if (!wasFound)
-                messagesToRemove.Add( pair.Key );
+                messagesToRemove.Add(pair.Key);
         }
- 
         foreach (string message in messagesToRemove) {
-            eventTable.Remove( message );
+            eventTable.Remove(message);
         }
     }
  
@@ -94,37 +90,35 @@ static internal class Messenger {
     }
     #endregion
  
+    
     #region Message logging and exception throwing
     static public void OnListenerAdding(string eventType, Delegate listenerBeingAdded) {
 #if LOG_ALL_MESSAGES || LOG_ADD_LISTENER
         Debug.Log("MESSENGER OnListenerAdding \t\"" + eventType + "\"\t{" + listenerBeingAdded.Target + " -> " + listenerBeingAdded.Method + "}");
 #endif
- 
         if (!eventTable.ContainsKey(eventType)) {
-            eventTable.Add(eventType, null );
+            eventTable.Add(eventType, null);
         }
- 
         Delegate d = eventTable[eventType];
         if (d != null && d.GetType() != listenerBeingAdded.GetType()) {
             throw new ListenerException(string.Format("Attempting to add listener with inconsistent signature for event type {0}. Current listeners have type {1} and listener being added has type {2}", eventType, d.GetType().Name, listenerBeingAdded.GetType().Name));
         }
     }
  
-    static public void OnListenerRemoving(string eventType, Delegate listenerBeingRemoved) {
+    static public void OnListenerRemoving(string eventType, Delegate listenerBeingRemoved = null) {
 #if LOG_ALL_MESSAGES
         Debug.Log("MESSENGER OnListenerRemoving \t\"" + eventType + "\"\t{" + listenerBeingRemoved.Target + " -> " + listenerBeingRemoved.Method + "}");
 #endif
-        //if (eventTable.ContainsKey(eventType)) {
-        //    Delegate d = eventTable[eventType];
- 
-        //    if (d == null) {
-        //        throw new ListenerException(string.Format("Attempting to remove listener with for event type \"{0}\" but current listener is null.", eventType));
-        //    } else if (d.GetType() != listenerBeingRemoved.GetType()) {
-        //        throw new ListenerException(string.Format("Attempting to remove listener with inconsistent signature for event type {0}. Current listeners have type {1} and listener being removed has type {2}", eventType, d.GetType().Name, listenerBeingRemoved.GetType().Name));
-        //    }
-        //} else {
-        //    throw new ListenerException(string.Format("Attempting to remove listener for type \"{0}\" but Messenger doesn't know about this event type.", eventType));
-        //}
+        // if (eventTable.ContainsKey(eventType)) {
+        //     Delegate d = eventTable[eventType];
+        //     if (d == null) {
+        //         throw new ListenerException(string.Format("Attempting to remove listener with for event type \"{0}\" but current listener is null.", eventType));
+        //     } else if (d.GetType() != listenerBeingRemoved.GetType()) {
+        //         throw new ListenerException(string.Format("Attempting to remove listener with inconsistent signature for event type {0}. Current listeners have type {1} and listener being removed has type {2}", eventType, d.GetType().Name, listenerBeingRemoved.GetType().Name));
+        //     }
+        // } else {
+        //     throw new ListenerException(string.Format("Attempting to remove listener for type \"{0}\" but Messenger doesn't know about this event type.", eventType));
+        // }
     }
  
     static public void OnListenerRemoved(string eventType) {
@@ -171,6 +165,7 @@ static internal class Messenger {
     }
     #endregion
  
+    
     #region AddListener
     //No parameters
     static public void AddListener(string eventType, Callback handler) {
@@ -197,6 +192,7 @@ static internal class Messenger {
     }
     #endregion
  
+    
     #region RemoveListener
     //No parameters
     static public void RemoveListener(string eventType, Callback handler) {
@@ -284,11 +280,9 @@ static internal class Messenger {
         Debug.Log("MESSENGER\t" + System.DateTime.Now.ToString("hh:mm:ss.fff") + "\t\t\tInvoking \t\"" + eventType + "\"");
 #endif
         OnBroadcasting(eventType);
- 
         Delegate d;
         if (eventTable.TryGetValue(eventType, out d)) {
             Callback<T, U> callback = d as Callback<T, U>;
- 
             if (callback != null) {
                 callback(arg1, arg2);
             } else {
@@ -303,11 +297,9 @@ static internal class Messenger {
         Debug.Log("MESSENGER\t" + System.DateTime.Now.ToString("hh:mm:ss.fff") + "\t\t\tInvoking \t\"" + eventType + "\"");
 #endif
         OnBroadcasting(eventType);
- 
         Delegate d;
         if (eventTable.TryGetValue(eventType, out d)) {
             Callback<T, U, V> callback = d as Callback<T, U, V>;
- 
             if (callback != null) {
                 callback(arg1, arg2, arg3);
             } else {
