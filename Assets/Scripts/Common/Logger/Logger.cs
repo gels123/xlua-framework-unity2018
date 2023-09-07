@@ -63,8 +63,8 @@ public class Logger
 #if UNITY_EDITOR || LOGGER_ON
         Debug.LogError((p != null && p.Length > 0 ? string.Format(s, p) : s));
 #else
-        AddError(string.Format("clientversion:{0} uid: {1} device:{2} ip:{3} platname:{4} platChannel:{5} scenename:{6} debug_build_ver:{7} \n {8} ",
-        clientVerstion, loginUid, (SystemInfo.deviceModel + "/" + SystemInfo.deviceUniqueIdentifier), localIP, platName, platChannel, sceneName, DEBUG_BUILD_VER,
+        AddError(string.Format("appVersion:{0} uid: {1} device:{2} ip:{3} platname:{4} platChannel:{5} scenename:{6} debug_build_ver:{7} \n {8} ",
+        appVersion, loginUid, (SystemInfo.deviceModel + "/" + SystemInfo.deviceUniqueIdentifier), localIP, platName, platChannel, sceneName, DEBUG_BUILD_VER,
         (p != null && p.Length > 0 ? string.Format(s, p) : s)));
 #endif
     }
