@@ -19,7 +19,7 @@ namespace AssetBundles
         const string assetName = "AssetBundleManifest";
         AssetBundleManifest manifest = null;
         byte[] manifestBytes = null;
-        string[] emptyStringArray = new string[] { };
+        string[] emptyStringArray = new string[] {};
         
         public Manifest()
         {

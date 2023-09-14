@@ -507,7 +507,6 @@ namespace AssetBundles
             {
                 return false;
             }
-
             var creater = AssetBundleRequester.Get();
             var url = AssetBundleUtility.GetAssetBundleDataPath(assetbundleName);
 
@@ -531,7 +530,8 @@ namespace AssetBundles
                 return new EditorAssetBundleAsyncLoader(assetbundleName);
             }
 #endif
-            if (type == null) type = typeof(UObject);
+            if (type == null)
+                type = typeof(UObject);
             var loader = AssetBundleAsyncLoader.Get(isatlas, type);
             prosessingAssetBundleAsyncLoader.Add(loader);
             if (manifest != null)
@@ -547,14 +547,12 @@ namespace AssetBundles
                         IncreaseReferenceCount(dependance);
                     }
                 }
-
                 loader.Init(assetbundleName, dependancies);
             }
             else
             {
                 loader.Init(assetbundleName, null);
             }
-
             CreateAssetBundleAsync(assetbundleName);
             // 加载器持有的引用：同一个ab能同时存在多个加载器，等待ab创建器完成
             IncreaseReferenceCount(assetbundleName);
@@ -827,5 +825,4 @@ namespace AssetBundles
             Logger.Log("********** AssetBundleManager : Call TestHotfix in cs...");
         }
     }
-
 }

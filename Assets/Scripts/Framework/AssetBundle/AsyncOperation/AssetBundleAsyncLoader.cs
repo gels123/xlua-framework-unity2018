@@ -93,7 +93,6 @@ namespace AssetBundles
             {
                 return 1.0f;
             }
-
             float progressSlice = 1.0f / waitingCount;
             float progressValue = (waitingCount - waitingList.Count) * progressSlice;
             for (int i = waitingList.Count - 1; i >= 0; i--)
@@ -111,7 +110,6 @@ namespace AssetBundles
             {
                 return;
             }
-
             for (int i = waitingList.Count - 1; i >= 0; i--)
             {
                 if (AssetBundleManager.Instance.IsAssetBundleLoaded(waitingList[i]))

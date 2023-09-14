@@ -32,7 +32,6 @@ namespace AssetBundles
             {
                 loader = new AssetAsyncLoader(++sequence);
             }
-
             loader.isAtlas = isatlas;
             loader.assetType = type;
             return loader;
@@ -59,15 +58,8 @@ namespace AssetBundles
             {
                 this.asset = (UnityEngine.Object) asset;
             }
-            
             assetbundleLoader = null;
             isOver = true;
-        }
-
-        public int Sequence
-        {
-            get;
-            protected set;
         }
 
         public void Init(string assetName, BaseAssetBundleAsyncLoader loader)
@@ -76,6 +68,12 @@ namespace AssetBundles
             this.asset = null;
             isOver = false;
             assetbundleLoader = loader;
+        }
+        
+        public int Sequence
+        {
+            get;
+            protected set;
         }
 
         public string AssetName

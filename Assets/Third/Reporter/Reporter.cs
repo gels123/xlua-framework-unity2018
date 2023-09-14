@@ -2025,7 +2025,7 @@ public class Reporter : MonoBehaviour {
 	}
 	
 	//read build information 
-	IEnumerator readInfo(  )
+	IEnumerator readInfo()
 	{
 		string prefFile = "build_info.txt" ;
 		string url = prefFile;
@@ -2044,18 +2044,17 @@ public class Reporter : MonoBehaviour {
         url = url.Replace("\\","/");
         // float startTime = Time.realtimeSinceStartup;
 
-		WWW www = new WWW( url );
+		WWW www = new WWW(url);
 		yield return www ;
 		
-		if( !string.IsNullOrEmpty( www.error ) )
+		if(!string.IsNullOrEmpty(www.error))
 		{
-			Debug.LogError( www.error );
+			Debug.LogError(www.error);
 		}
 		else 
 		{
-			buildDate = www.text ;
+			buildDate = www.text;
 		}
-		
 		yield break;
 	}
 }

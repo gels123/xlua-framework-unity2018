@@ -107,13 +107,11 @@ namespace AssetBundles
             {
                 return;
             }
-            
             isOver = www != null && (www.isDone);
             if (!isOver)
             {
                 return;
             }
-
             if (www.assetBundle==null)
             {
                 Logger.LogError(url+" load error");
