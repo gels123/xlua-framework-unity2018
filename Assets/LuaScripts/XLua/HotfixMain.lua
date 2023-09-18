@@ -11,7 +11,7 @@ local modules = {
 }
 
 local function Start()
-	print("HotfixMain start...")
+	print("HotfixMain.Start...")
 	for _,v in ipairs(modules) do
 		local hotfix_module = reimport(v)
 		hotfix_module.Register()

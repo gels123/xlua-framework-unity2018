@@ -57,8 +57,8 @@ public class AssetbundleUpdater : MonoBehaviour
         timeStamp = (DateTime.Now - startDate).TotalMilliseconds;
         UILauncher.Instance.SetSatus("正在检测资源更新...");
     }
-    #region 主流程
 
+    #region 主流程
     public IEnumerator StartCheckUpdate()
     {
         yield return StartCoroutine(CheckUpdateOrDownloadGame());
@@ -102,7 +102,6 @@ public class AssetbundleUpdater : MonoBehaviour
 
         yield break;
     }
-
     #endregion
 
     #region 初始化工作

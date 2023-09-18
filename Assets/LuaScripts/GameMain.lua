@@ -1,15 +1,21 @@
 -- 全局模块
 require "Global.Global"
+Config = require "Global.Config"
 	
 -- 定义为全局模块，整个lua程序的入口类
 GameMain = {}
 
 -- 进入游戏
 local function EnterGame()
-	-- lua调试
-	-- local breakInfoFun,xpcallFun = require("LuaDebug")("localhost", 7003)
-	--local ok = require "emmy_core".tcpListen('0.0.0.0', 7003)
-	--print("debug with emmylua", ok)
+	print("GameMain.EnterGame...")
+	-- 启动lua调试
+	if Config.Debug then
+		-- require("LuaDebug")("localhost", 6666)
+		local emmy = string.format("%s/../Plugins/emmy/windows/x64/?.dll", CS.UnityEngine.Application.streamingAssetsPath)
+		package.cpath = package.cpath .. emmy
+		local dbg = require('emmy_core')
+		dbg.tcpListen('localhost', 6666)
+	end
 	
 	-- TODO：服务器信息应该从服务器上拉取，这里读取测试数据
 	local ServerData = require "DataCenter.ServerData.ServerData"

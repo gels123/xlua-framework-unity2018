@@ -2,7 +2,7 @@
 -- xlua热修复测试，主要测试下资源热更以后xlua重启后热修复是否生效
 -- 注意：
 -- 1、现在的做法热修复模块一定要提供Register、Unregister两个接口，因为现在热修复模块要支持动态加载和卸载
--- 2、注册使用xlua.hotfix或者util.hotfix_ex
+-- 2、注册使用xlua.hotfix或者util.hotfixex
 -- 3、注销一律使用xlua.hotfix
 
 local util = require "XLua.Common.util"
@@ -23,7 +23,7 @@ end
 
 local function Register()
 	xlua.hotfix(AssetbundleUpdater, "TestHotfix", AssetbundleUpdaterTestHotfix)
-	util.hotfix_ex(AssetBundleManager, "TestHotfix", AssetBundleManagerTestHotfix)
+	--util.hotfixex(AssetBundleManager, "TestHotfix", AssetBundleManagerTestHotfix)
 end
 
 local function Unregister()

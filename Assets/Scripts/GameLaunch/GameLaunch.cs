@@ -27,10 +27,10 @@ public class GameLaunch : MonoBehaviour
     IEnumerator Start()
     {
         //注释掉IOS的推送服务
-//#if UNITY_IPHONE
-//        UnityEngine.iOS.NotificationServices.RegisterForNotifications(UnityEngine.iOS.NotificationType.Alert | UnityEngine.iOS.NotificationType.Badge | UnityEngine.iOS.NotificationType.Sound);
-//        UnityEngine.iOS.Device.SetNoBackupFlag(Application.persistentDataPath);
-//#endif
+// #if UNITY_IPHONE
+//         UnityEngine.iOS.NotificationServices.RegisterForNotifications(UnityEngine.iOS.NotificationType.Alert | UnityEngine.iOS.NotificationType.Badge | UnityEngine.iOS.NotificationType.Sound);
+//         UnityEngine.iOS.Device.SetNoBackupFlag(Application.persistentDataPath);
+// #endif
 
         // 启动资源管理模块
         var start = DateTime.Now;
