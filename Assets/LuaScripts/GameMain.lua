@@ -10,11 +10,12 @@ local function EnterGame()
 	print("GameMain.EnterGame...")
 	-- 启动lua调试
 	if Config.Debug then
-		-- require("LuaDebug")("localhost", 6666)
-		local emmy = string.format("%s/../Plugins/emmy/windows/x64/?.dll", CS.UnityEngine.Application.streamingAssetsPath)
+		-- Old way: require("LuaDebug")("localhost", 6666)
+		local emmy = string.format(";%s/../Plugins/emmy/windows/x64/emmy_core.dll;", CS.UnityEngine.Application.streamingAssetsPath)
 		package.cpath = package.cpath .. emmy
 		local dbg = require('emmy_core')
 		dbg.tcpListen('localhost', 6666)
+		--dbg.waitIDE()
 	end
 	
 	-- TODO：服务器信息应该从服务器上拉取，这里读取测试数据

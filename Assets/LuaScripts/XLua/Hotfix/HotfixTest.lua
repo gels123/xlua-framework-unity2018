@@ -22,7 +22,7 @@ local function AssetBundleManagerTestHotfix(self)
 end
 
 local function Register()
-	xlua.hotfix(AssetbundleUpdater, "TestHotfix", AssetbundleUpdaterTestHotfix)
+	--xlua.hotfix(AssetbundleUpdater, "TestHotfix", AssetbundleUpdaterTestHotfix)
 	--util.hotfixex(AssetBundleManager, "TestHotfix", AssetBundleManagerTestHotfix)
 end
 

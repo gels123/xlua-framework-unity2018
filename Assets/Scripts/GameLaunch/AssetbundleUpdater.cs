@@ -46,7 +46,7 @@ public class AssetbundleUpdater : MonoBehaviour
     int finishedDownloadCount = 0;
 
     // Hotfix测试---用于测试热更模块的热修复
-    public void TestHotfix()
+    public static void TestHotfix()
     {
         Logger.Log("********** AssetbundleUpdater : Call TestHotfix in cs...");
     }
@@ -62,9 +62,9 @@ public class AssetbundleUpdater : MonoBehaviour
     public IEnumerator StartCheckUpdate()
     {
         yield return StartCoroutine(CheckUpdateOrDownloadGame());
-#if UNITY_EDITOR || CLIENT_DEBUG
-        TestHotfix();
-#endif
+// #if UNITY_EDITOR || CLIENT_DEBUG
+//         TestHotfix();
+// #endif
     }
 
     IEnumerator CheckUpdateOrDownloadGame()
@@ -81,7 +81,6 @@ public class AssetbundleUpdater : MonoBehaviour
 
         // 获取服务器地址，并检测大版本更新、资源更新
         bool isInternalVersion = ChannelManager.Instance.IsInternalVersion();
-
         yield return GetUrlListAndCheckUpdate(isInternalVersion);
 
         // 执行大版本更新、资源更新
@@ -99,7 +98,6 @@ public class AssetbundleUpdater : MonoBehaviour
         {
             yield return UpdateFinish(false);
         }
-
         yield break;
     }
     #endregion
@@ -110,7 +108,6 @@ public class AssetbundleUpdater : MonoBehaviour
     {
         clientAppVersion = ChannelManager.Instance.appVersion;
         clientResVersion = ChannelManager.Instance.resVersion;
-
         serverAppVersion = clientAppVersion;
         serverResVersion = clientResVersion;
     }
@@ -242,8 +239,7 @@ public class AssetbundleUpdater : MonoBehaviour
     IEnumerator InternalGetUrlList()
     {
         // 内网服务器地址设置
-        var localSerUrlRequest =
-            AssetBundleManager.Instance.RequestAssetFileAsync(AssetBundleConfig.AssetBundleServerUrlFileName);
+        var localSerUrlRequest = AssetBundleManager.Instance.RequestAssetFileAsync(AssetBundleConfig.AssetBundleServerUrlFileName);
         yield return localSerUrlRequest;
 #if UNITY_ANDROID
         // TODO：GooglePlay下载还有待探索
